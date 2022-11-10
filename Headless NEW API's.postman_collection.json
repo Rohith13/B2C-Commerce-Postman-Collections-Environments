@@ -1,0 +1,1294 @@
+{
+	"info": {
+		"_postman_id": "5db48dd9-a021-4f25-b712-631883ddb7ed",
+		"name": "Headless NEW API's",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9736386"
+	},
+	"item": [
+		{
+			"name": "Auths",
+			"item": [
+				{
+					"name": "Oauth2 get Client token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var tokenData = JSON.parse(responseBody);",
+									"",
+									"if(tokenData.access_token!==null && tokenData.token_type!==null ){",
+									"    postman.setEnvironmentVariable(\"Authorization_key\", tokenData.token_type + \" \" + tokenData.access_token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "4cbbff5c-57b9-4a9c-a1c2-8d4035584a35",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Commercecloud@2020",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic NGNiYmZmNWMtNTdiOS00YTljLWExYzItOGQ0MDM1NTg0YTM1OkNvbW1lcmNlY2xvdWRAMjAyMA==",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "SALESFORCE_COMMERCE_API:{{tenant}} sfcc.cdn-zones.rw",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://account.demandware.com/dw/oauth2/access_token",
+							"protocol": "https",
+							"host": [
+								"account",
+								"demandware",
+								"com"
+							],
+							"path": [
+								"dw",
+								"oauth2",
+								"access_token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product Calls",
+			"item": [
+				{
+					"name": "POST Product Search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiMmQzZTMzN2EtYWFmYi00MTg1LWIyNjMtNWRkNDc1MjI0YmFhLTc4MDUwOTAxIiwic3VibmFtZSI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsImlzcyI6Imh0dHBzOi8vYWNjb3VudC5kZW1hbmR3YXJlLmNvbTo0NDMvZHdzc28vb2F1dGgyIiwidG9rZW5OYW1lIjoiYWNjZXNzX3Rva2VuIiwidG9rZW5fdHlwZSI6IkJlYXJlciIsImF1dGhHcmFudElkIjoiUm9fdTM5X05jSG9SbXY2TFJTMS1qUEhlR0FjIiwiYXVkIjoiNGNiYmZmNWMtNTdiOS00YTljLWExYzItOGQ0MDM1NTg0YTM1IiwibmJmIjoxNjQ0MjI0NDAzLCJncmFudF90eXBlIjoiY2xpZW50X2NyZWRlbnRpYWxzIiwic2NvcGUiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEk6enphc18wMjkiLCJtYWlsIiwidGVuYW50RmlsdGVyIiwic2ZjYy5wcm9kdWN0cy5ydyIsInByb2ZpbGUiLCJyb2xlcyJdLCJhdXRoX3RpbWUiOjE2NDQyMjQ0MDMsInJlYWxtIjoiLyIsImV4cCI6MTY0NDIyNjIwMywiaWF0IjoxNjQ0MjI0NDAzLCJleHBpcmVzX2luIjoxODAwLCJqdGkiOiJ5ZXAxakZuY1ZqMHAyZ3NHS3RuMjdFX1lYT2ciLCJjbGllbnRfaWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJ0ZW5hbnRGaWx0ZXIiOiJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldixiZGx3X3ByZCx6emFzXzAyOSIsInJvbGVzIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJIiwiQU1fQVBJX0FETUlOIl19.Ty0KnkDDPIYLZJkBkIyGt8NT2DDlQx6DSTQtcsS3NKQUdRtt1IazdGgjrSb0VQJkPYAI9RX7L5d7JL640ts8m1Mphc7ZwfxMjDbianRH-j78fhD5D56a4mMDBWY4rKaHY09eRzqUKfbuT5H-G4ooYiNJY9dmzrNSInkO_-MQWueVyh4QR6lKReFLr3jVNh7GK81A019HPsH5ABcBPD8QRNhEaPTAV8eA_rHNX_EtkfPThq-m5H4tc9Eo8KVvATWaZ2mzKPP0NEgiofV2p8gGKPStTu0PQTAYADccuc5lYueZl64iKONvxDxGUyiEiH_QbEesl_g8IqKBQ5QssKorEg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"expand\": [\n    \"variations\"\n  ],\n  \"query\": {\n    \"textQuery\": {\n      \"fields\": [\n        \"id\"\n      ],\n      \"searchPhrase\": \"ipod\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/product/products/{{version}}/organizations/{{organizationId}}/product-search",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"product",
+								"products",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"product-search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiMWY4MGM2ZjYtZDlkMC00YWVlLThiNDMtNzMxZGZjYTdhMzAyLTgyODM5MjcxIiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50LmRlbWFuZHdhcmUuY29tOjQ0My9kd3Nzby9vYXV0aDIiLCJ0b2tlbk5hbWUiOiJhY2Nlc3NfdG9rZW4iLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwiYXV0aEdyYW50SWQiOiI0V3NQVzZyS3o0YlpUQWc2REhDUFlXV2l3MFEiLCJhdWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJuYmYiOjE2MjY0NTMzOTMsImdyYW50X3R5cGUiOiJjbGllbnRfY3JlZGVudGlhbHMiLCJzY29wZSI6WyJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldiIsIm1haWwiLCJ0ZW5hbnRGaWx0ZXIiLCJzZmNjLnByb2R1Y3RzLnJ3IiwicHJvZmlsZSIsInJvbGVzIl0sImF1dGhfdGltZSI6MTYyNjQ1MzM5MywicmVhbG0iOiIvIiwiZXhwIjoxNjI2NDU1MTkzLCJpYXQiOjE2MjY0NTMzOTMsImV4cGlyZXNfaW4iOjE4MDAsImp0aSI6InBoV3FSdXdFVmpUaTZWaURGNnNDdnVuZEJkSSIsImNsaWVudF9pZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsInRlbmFudEZpbHRlciI6IlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfZGV2LGJkbHdfcHJkLHp6YXNfMDI5Iiwicm9sZXMiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEkiLCJBTV9BUElfQURNSU4iXX0.UpxOe1bAssQ86pbl6ssOvHm80tv7g6QackTYygqyBQ_SKjCHJ4Ftl087cFeuWYkd-DIdVt5Q1D5ClZEfsektw0ikgc4yxYrpPrl7Qu5lLFxcKnzd_FgfJZG5Xg8uxmqPMzR79vC5EEMeN3ZCu76ruqfzDdmyQnomhOYXHsAjxqP7Ivsn76pqFj41-ReL7CO0yBvm1J7kltN5M1zVV5Tn68kCKEe87XFJhODe5p4QDbhuJEMWtXkB9-62CLl6313ZbfykfQkcWX9mo1vrAYv9PsLIy5QUVZFspKvY8t_8eB5AxdekOlE76qleyVkvj00Dcvq-xq9krw9SH-YlkDjkbg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/product/products/{{version}}/organizations/{{organizationId}}/products/25565178",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"product",
+								"products",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"products",
+								"25565178"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Headless Create Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiZDIzOTQ5NWItNTE2NC00Y2FjLTgwNzQtNTkxNWM5Nzc4MDU0LTI1NTY3OTI1MCIsImlzcyI6Imh0dHBzOi8vYWNjb3VudC5kZW1hbmR3YXJlLmNvbTo0NDMvZHdzc28vb2F1dGgyIiwidG9rZW5OYW1lIjoiYWNjZXNzX3Rva2VuIiwidG9rZW5fdHlwZSI6IkJlYXJlciIsImF1dGhHcmFudElkIjoid0RhMklGUkFLRmkySjJzR05wdlpiUkVNbnBFIiwiYXVkIjoiNGNiYmZmNWMtNTdiOS00YTljLWExYzItOGQ0MDM1NTg0YTM1IiwibmJmIjoxNjI1MzM3MjYyLCJncmFudF90eXBlIjoiY2xpZW50X2NyZWRlbnRpYWxzIiwic2NvcGUiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEk6enphc18wMjkiLCJtYWlsIiwidGVuYW50RmlsdGVyIiwic2ZjYy5wcm9kdWN0cy5ydyIsInByb2ZpbGUiLCJyb2xlcyJdLCJhdXRoX3RpbWUiOjE2MjUzMzcyNjIsInJlYWxtIjoiLyIsImV4cCI6MTYyNTMzOTA2MiwiaWF0IjoxNjI1MzM3MjYyLCJleHBpcmVzX2luIjoxODAwLCJqdGkiOiIwYUlNTTRIQTN1VzJWa0FsYVVvcFhsNWQyNm8iLCJjbGllbnRfaWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJ0ZW5hbnRGaWx0ZXIiOiJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldixiZGx3X3ByZCx6emFzXzAyOSIsInJvbGVzIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJIiwiQU1fQVBJX0FETUlOIl19.hKDn-upkJSB5XZBB8C00VIyviJ_bqUv93Dyr1cjdU2JU9ve-x-dCqJfyGKA2iXNkHu1PBHRT0ABpx26Ssg_4oSR89pOxZhk-e9b6hHmz8-_v0RqjLMziwSzYoP6AG-cSDoaGgo5gm_MMseFmSl73640Ljj80M9r_B-oHOm5oWJD503QgK1SxzboiG2zPr68YkgcksGfS0sNQOUCwhzmCPsJ4ra6hqXwcHRjmUUHCKEhwjdW2MQrIKKijhUCx1EFKx29eE2BnrxBuRTY3vb98B2cyJ4jm9PlbByxOjZrvpuSlf0_fR2tAx-zsEKHTsVPq60dLEtZCuztsG_kQWlcoGQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignedCategories\": [\r\n    {\r\n      \"catalogId\": \"apparel-catalog\",\r\n      \"categoryId\": \"mens-accessories\"\r\n    },\r\n    {\r\n      \"catalogId\": \"storefront-catalog-en\",\r\n      \"categoryId\": \"top-seller\"\r\n    },\r\n    {\r\n      \"catalogId\": \"storefront-catalog-en\",\r\n      \"categoryId\": \"electronics-gaming\"\r\n    }\r\n  ],\r\n  \"brand\": \"Apple\",\r\n  \"classificationCategory\": {\r\n    \"catalogId\": \"storefront-catalog-en\",\r\n    \"categoryId\": \"top-seller\"\r\n  },\r\n  \"creationDate\": \"2019-02-21T22:10:02.000Z\",\r\n  \"id\": \"25565178\",\r\n  \"image\": {\r\n    \"absUrl\": \"https://example.com/images/large/ipod-classic-silver.jpg\",\r\n    \"alt\": {\r\n      \"default\": \"Apple iPod Classic, , large\"\r\n    },\r\n    \"path\": \"large/ipod-classic-silver.jpg\",\r\n    \"title\": {\r\n      \"default\": \"Apple iPod Classic, \"\r\n    }\r\n  },\r\n  \"imageGroups\": [\r\n    {\r\n      \"images\": [\r\n        {\r\n          \"absUrl\": \"https://example.com/images/large/ipod-classic-silver.jpg\",\r\n          \"alt\": {\r\n            \"default\": \"Apple iPod Classic, , large\"\r\n          },\r\n          \"path\": \"large/ipod-classic-silver.jpg\",\r\n          \"title\": {\r\n            \"default\": \"Apple iPod Classic, \"\r\n          }\r\n        }\r\n      ],\r\n      \"viewType\": \"large\"\r\n    },\r\n    {\r\n      \"images\": [\r\n        {\r\n          \"absUrl\": \"https://example.com/images/medium/ipod-classic-silver.jpg\",\r\n          \"alt\": {\r\n            \"default\": \"Apple iPod Classic, , medium\"\r\n          },\r\n          \"path\": \"medium/ipod-classic-silver.jpg\",\r\n          \"title\": {\r\n            \"default\": \"Apple iPod Classic, \"\r\n          }\r\n        }\r\n      ],\r\n      \"viewType\": \"medium\"\r\n    },\r\n    {\r\n      \"images\": [\r\n        {\r\n          \"absUrl\": \"https://example.com/images/small/ipod-classic-silver.jpg\",\r\n          \"alt\": {\r\n            \"default\": \"Apple iPod Classic, , small\"\r\n          },\r\n          \"path\": \"small/ipod-classic-silver.jpg\",\r\n          \"title\": {\r\n            \"default\": \"Apple iPod Classic, \"\r\n          }\r\n        }\r\n      ],\r\n      \"viewType\": \"small\"\r\n    }\r\n  ],\r\n  \"lastModified\": \"2019-08-28T18:49:09.000Z\",\r\n  \"localizedTaxClassId\": {\r\n    \"de\": \"exempt\",\r\n    \"default\": \"standard\",\r\n    \"en-US\": \"exempt\"\r\n  },\r\n  \"longDescription\": {\r\n    \"default\": {\r\n      \"markup\": \"Supports MP3, MP3 VBR, AAC, Protected AAC, Audible 2, 3 and 4, Apple Lossless and AIFF audio formats; also supports JPEG, BMP, GIF, TIFF, PSD (Mac only) and PNG image formats and H.264 (high-definition), MPEG-4 and MPEG-4 video formats\",\r\n      \"source\": \"Supports MP3, MP3 VBR, AAC, Protected AAC, Audible 2, 3 and 4, Apple Lossless and AIFF audio formats; also supports JPEG, BMP, GIF, TIFF, PSD (Mac only) and PNG image formats and H.264 (high-definition), MPEG-4 and MPEG-4 video formats\"\r\n    }\r\n  },\r\n  \"name\": {\r\n    \"default\": \"Apple iPod Classic\"\r\n  },\r\n  \"onlineFlag\": {\r\n    \"default\": true\r\n  },\r\n  \"owningCatalogId\": \"electronics-catalog\",\r\n  \"owningCatalogName\": {\r\n    \"default\": \"Electronics Master Catalog\"\r\n  },\r\n  \"pageDescription\": {\r\n    \"default\": \"This iPod delivers everything you love about iPod with added features all wrapped in a tiny 4.9 oz. package. With 120GB of storage and up to 36 hours music playback, iPod classic lets you enjoy up to 30,000 songs or 150 hours of video — or a combination — wherever you go.\"\r\n  },\r\n  \"pageKeywords\": {\r\n    \"default\": \"Apple, iPod, iPod Classic, MP3, Music Player\"\r\n  },\r\n  \"pageTitle\": {\r\n    \"default\": \"Apple iPod Nano\"\r\n  },\r\n  \"primaryCategories\": [\r\n    {\r\n      \"catalogId\": \"apparel-catalog\",\r\n      \"categoryId\": \"mens-accessories\"\r\n    },\r\n    {\r\n      \"catalogId\": \"storefront-catalog-en\",\r\n      \"categoryId\": \"top-seller\"\r\n    }\r\n  ],\r\n  \"primaryCategoryId\": \"top-seller\",\r\n  \"searchable\": {\r\n    \"default\": true\r\n  },\r\n  \"shortDescription\": {\r\n    \"default\": {\r\n      \"markup\": \"This iPod delivers everything you love about iPod with added features all wrapped in a tiny 4.9 oz. package. With 120GB of storage and up to 36 hours music playback, iPod classic lets you enjoy up to 30,000 songs or 150 hours of video — or a combination — wherever you go.\",\r\n      \"source\": \"This iPod delivers everything you love about iPod with added features all wrapped in a tiny 4.9 oz. package. With 120GB of storage and up to 36 hours music playback, iPod classic lets you enjoy up to 30,000 songs or 150 hours of video — or a combination — wherever you go.\"\r\n    }\r\n  },\r\n  \"taxClassId\": \"standard\",\r\n  \"type\": {\r\n    \"master\": true\r\n  },\r\n  \"validFrom\": {\r\n    \"default\": \"1998-05-03T00:00:00.000Z\",\r\n    \"default@SiteGenesis\": \"1998-05-11T00:00:00.000Z\"\r\n  },\r\n  \"validTo\": {\r\n    \"default\": \"2028-07-03T00:00:00.000Z\",\r\n    \"default@SiteGenesis\": \"2028-05-30T00:03:00.000Z\"\r\n  },\r\n  \"variants\": [\r\n    {\r\n      \"productId\": \"apple-ipod-classic-silver-120g\",\r\n      \"variationValues\": {\r\n        \"color\": \"Silver\",\r\n        \"memorySize\": \"120 GB\"\r\n      }\r\n    },\r\n    {\r\n      \"productId\": \"apple-ipod-classic-black-120g\",\r\n      \"variationValues\": {\r\n        \"color\": \"Black\",\r\n        \"memorySize\": \"120 GB\"\r\n      }\r\n    }\r\n  ],\r\n  \"variationAttributes\": [\r\n    {\r\n      \"attributeDefinitionId\": \"color\",\r\n      \"attributeDefinitionName\": {\r\n        \"default\": \"Color\"\r\n      },\r\n      \"id\": \"color\",\r\n      \"name\": {\r\n        \"default\": \"Color\"\r\n      },\r\n      \"shared\": true,\r\n      \"slicing\": false,\r\n      \"values\": [\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Silver\"\r\n          },\r\n          \"position\": 1,\r\n          \"value\": \"Silver\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Black\"\r\n          },\r\n          \"position\": 2,\r\n          \"value\": \"Black\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Purple\"\r\n          },\r\n          \"position\": 3,\r\n          \"value\": \"Purple\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Blue\"\r\n          },\r\n          \"position\": 4,\r\n          \"value\": \"Blue\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Green\"\r\n          },\r\n          \"position\": 5,\r\n          \"value\": \"Green\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Yellow\"\r\n          },\r\n          \"position\": 6,\r\n          \"value\": \"Yellow\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Orange\"\r\n          },\r\n          \"position\": 7,\r\n          \"value\": \"Orange\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Red\"\r\n          },\r\n          \"position\": 8,\r\n          \"value\": \"Red\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Fuscia\"\r\n          },\r\n          \"position\": 9,\r\n          \"value\": \"Fuscia\"\r\n        }\r\n      ],\r\n      \"variationAttributeType\": \"string\"\r\n    },\r\n    {\r\n      \"attributeDefinitionId\": \"memorySize\",\r\n      \"attributeDefinitionName\": {\r\n        \"default\": \"Memory Size\"\r\n      },\r\n      \"id\": \"memorySize\",\r\n      \"name\": {\r\n        \"default\": \"Memory Size\"\r\n      },\r\n      \"shared\": true,\r\n      \"slicing\": false,\r\n      \"values\": [\r\n        {\r\n          \"name\": {\r\n            \"default\": \"1 GB\"\r\n          },\r\n          \"position\": 1,\r\n          \"value\": \"1 GB\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"2 GB\"\r\n          },\r\n          \"position\": 2,\r\n          \"value\": \"2 GB\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"8 GB\"\r\n          },\r\n          \"position\": 3,\r\n          \"value\": \"8 GB\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"16 GB\"\r\n          },\r\n          \"position\": 4,\r\n          \"value\": \"16 GB\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"32 GB\"\r\n          },\r\n          \"position\": 5,\r\n          \"value\": \"32 GB\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"120 GB\"\r\n          },\r\n          \"position\": 6,\r\n          \"value\": \"120 GB\"\r\n        }\r\n      ],\r\n      \"variationAttributeType\": \"string\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/product/products/v1/organizations/{{organizationId}}/products/25565178",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"product",
+								"products",
+								"v1",
+								"organizations",
+								"{{organizationId}}",
+								"products",
+								"25565178"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AssignProductToCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiM2FiMDg5OGEtMGY2NS00OWFiLTkyZWYtODgwZWU1YWEzYmQzLTI0NDc3NzUyMyIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6IjZiSFhKYTRHZ0pZbEdvSzltUEdrMUJCOE01YyIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY1ODg1Mjg0MiwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOnp6YXNfMDI5IiwibWFpbCIsInRlbmFudEZpbHRlciIsInByb2ZpbGUiLCJyb2xlcyIsInNmY2MuY2F0YWxvZ3MucnciXSwiYXV0aF90aW1lIjoxNjU4ODUyODQyLCJyZWFsbSI6Ii8iLCJleHAiOjE2NTg4NTQ2NDIsImlhdCI6MTY1ODg1Mjg0MiwiZXhwaXJlc19pbiI6MTgwMCwianRpIjoiNml1RzFLREhYcUJ0aE5kX1NnTlV3azR2UXprIiwiY2xpZW50X2lkIjoiNGNiYmZmNWMtNTdiOS00YTljLWExYzItOGQ0MDM1NTg0YTM1IiwidGVuYW50RmlsdGVyIjoiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEk6YmRsd19kZXYsYmRsd19wcmQsenphc18wMjkiLCJyb2xlcyI6WyJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSSIsIkFNX0FQSV9BRE1JTiJdfQ.VssOJHprw-9R7pDKfa-b7GxESiehp9nX6u0PTwc_xBricASlk61OOwjyAN7MyOZqBHPHGrePrd9wc46_me0rGuXUk7Jdwde06v2lrFyfud2--nqcjWSmL12ZWb05A55BPREfaqrm_QB4m4ZEj98xM0XW3dhWqfYsjcJBuDUH02xxzM-xI9BhO9L5dMhsar6njGdDGOGelaS2BzC_H1Frp7kUFtZ-InZkUtrDWZBxSgmHBE60_FpeTTxn6ZqcM4nN5lhDss2fZlPQ6CdnyoSLNqK0JuGhVcI6nj26G6peJbqdzUu1CNmj4wxAenIZF6spwxUVZC9_8wQP_IQ8dGfTcQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"catalogId\": \"apparel-catalog\",\r\n  \"categoryId\": \"mens\",\r\n  \"position\": 1,\r\n  \"productId\": \"apple-ipod-shuffle\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/product/catalogs/v1/organizations/{{organizationId}}/catalogs/apparel-catalog/categories/mens/products/apple-ipod-shuffle",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"product",
+								"catalogs",
+								"v1",
+								"organizations",
+								"{{organizationId}}",
+								"catalogs",
+								"apparel-catalog",
+								"categories",
+								"mens",
+								"products",
+								"apple-ipod-shuffle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products in category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzI1NiIsImtpZCI6IjE2MjY5MjcwNjI1ODkiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJleHAiOjE2MzAxOTcxOTgsImlhdCI6MTYzMDE5NTM5OCwiaXNzIjoiY29tbWVyY2VjbG91ZC9wcm9kdWN0aW9uL3p6YXMtMDI5LTljMWM2YTQ4LTljZmItNDVjZi1iMmI2LTA0YWM2Y2M2ZjBiYS01Iiwic2NvcGUiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEk6enphc18wMjkiLCJzZmNjLnByb2R1Y3RzIiwic2ZjYy5wcm9kdWN0cy5ydyIsInNmY2MuY2F0YWxvZ3MiLCJzZmNjLmNhdGFsb2dzLnJ3Iiwic2ZjYy5jZG4tem9uZXMiLCJzZmNjLmNkbi16b25lcy5ydyIsInNmY2Muc2hvcHBlci1iYXNrZXRzLW9yZGVycyIsInNmY2Muc2hvcHBlci1iYXNrZXRzLW9yZGVycy5ydyIsInNmY2Muc2hvcHBlci1teWFjY291bnQuYmFza2V0cyIsInNmY2Muc2hvcHBlci1wcm9kdWN0cyIsInNmY2Muc2hvcHBlci1jYXRlZ29yaWVzIiwic2ZjYy5zaG9wcGVyLWRpc2NvdmVyeS1zZWFyY2giXSwic3ViIjoie1wiQ3VzdG9tZXJJbmZvXCI6e1wiY3VzdG9tZXJJZFwiOlwiYWNpbXhveGVzdmFOMkNlYTNydkNhaXA2cjBcIixcImd1ZXN0XCI6ZmFsc2UsXCJ2aXNpdElkXCI6XCJkOWMwMTBlYmJiNjVkNjRiNDg1MjgwZTE3MlwifX0ifQ.1XHv2FzTgyrFY0CzcwwHotjwqLmYtD7MHMRkrEJ-lmv_7L1MxRnXDwigWcgmnYKt4_wypjfp8B8B9VY7QH9qKg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjE1OTkyNjUzODYwODQiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJiYjg3YTc4Yy1iYjhlLTQ2ZTktYjZmZC05ZWJiNDE4NTY0ODAiLCJleHAiOjE2MDQ3Mjk1MTIsImlhdCI6MTYwNDcyNzcxMiwiaXNzIjoiY29tbWVyY2VjbG91ZC9wcm9kdWN0aW9uL3p6YXMtMDI4LTczNjVkMWZmLTQzYzAtNDMyZi04ODdlLTk1OTk0ZTUwNDQ3MC0zIiwic2NvcGUiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEk6enphc18wMjgiLCJzZmNjLnNob3BwZXItYmFza2V0cy1vcmRlcnMucnciLCJzZmNjLnNob3BwZXItZ2lmdC1jZXJ0aWZpY2F0ZXMiLCJzZmNjLnNob3BwZXItY2F0ZWdvcmllcyIsInNmY2Muc2hvcHBlci1wcm9kdWN0LXNlYXJjaCIsInNmY2Muc2hvcHBlci1wcm9kdWN0cyIsInNmY2Muc2hvcHBlci5zdG9yZXMiLCJzZmNjLnNob3BwZXItY3VzdG9tZXJzLnJlZ2lzdGVyIiwic2ZjYy5zaG9wcGVyLWN1c3RvbWVycy5sb2dpbiIsInNmY2Muc2hvcHBlci1teWFjY291bnQucnciLCJzZmNjLnNob3BwZXItbXlhY2NvdW50LmFkZHJlc3Nlcy5ydyIsInNmY2Muc2hvcHBlci1teWFjY291bnQuYmFza2V0cyIsInNmY2Muc2hvcHBlci1teWFjY291bnQub3JkZXJzIiwic2ZjYy5zaG9wcGVyLW15YWNjb3VudC5wYXltZW50aW5zdHJ1bWVudHMucnciLCJzZmNjLnNob3BwZXItbXlhY2NvdW50LnByb2R1Y3RsaXN0cy5ydyIsInNmY2MucHJvZHVjdHMiLCJzZmNjLnByb2R1Y3RzLnJ3Iiwic2ZjYy5jYXRhbG9ncyIsInNmY2MuY2F0YWxvZ3MucnciLCJzZmNjLmNkbi16b25lcyIsInNmY2MuY2RuLXpvbmVzLnJ3Iiwic2ZjYy5jdXN0b21lcmxpc3RzLnJ3Iiwic2ZjYy5zaG9wcGVyLXByb21vdGlvbnMiXSwic3ViIjoie1wiQ3VzdG9tZXJJbmZvXCI6e1wiY3VzdG9tZXJJZFwiOlwiYWJlcGl5cXhNWU00T00wUzlSTEJHaEdKRTJcIixcImd1ZXN0XCI6dHJ1ZSxcInZpc2l0SWRcIjpcIjUzMzEzZmQ0ZDEyMzI2N2JkMjY3MGZmOGZiXCJ9fSJ9.yyzwF2CyUEFVEVzLtvnUmTI3C2KBFuArBmnWaeo_uQY7vM1127673CER9zSKgsqUoNnMXLn2v2KiQ7m_WhlRZg",
+								"description": "guest token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/product/shopper-products/{{version}}/organizations/{{organizationId}}/categories/mens?siteId=RefArch",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"product",
+								"shopper-products",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"categories",
+								"mens"
+							],
+							"query": [
+								{
+									"key": "siteId",
+									"value": "RefArch"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get categories assigned to a catalog",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiMzY5ZDk3ZmItZDhlZi00MGFmLWE2MDEtYjhlYTBkMTBhYjY3LTIxODkzMDI0NSIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6IkpIZDdGeThJTm9vV2RGdnpYSVpjcDdncDNBdyIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY1ODg1NjMzMiwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOnp6YXNfMDI5IiwibWFpbCIsInRlbmFudEZpbHRlciIsInByb2ZpbGUiLCJyb2xlcyIsInNmY2MuY2F0YWxvZ3MucnciXSwiYXV0aF90aW1lIjoxNjU4ODU2MzMyLCJyZWFsbSI6Ii8iLCJleHAiOjE2NTg4NTgxMzIsImlhdCI6MTY1ODg1NjMzMiwiZXhwaXJlc19pbiI6MTgwMCwianRpIjoiU1U4NGE0TjlaQmtrdjZXVWhZTEdKcFJIcGxRIiwiY2xpZW50X2lkIjoiNGNiYmZmNWMtNTdiOS00YTljLWExYzItOGQ0MDM1NTg0YTM1IiwidGVuYW50RmlsdGVyIjoiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEk6YmRsd19kZXYsYmRsd19wcmQsenphc18wMjkiLCJyb2xlcyI6WyJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSSIsIkFNX0FQSV9BRE1JTiJdfQ.SRexodD79NnuwV-X8wHGU-AHjuHkm58CjlKcoCZHGELnnxrOsa9Bt37whDdAQSEGFI-p0ZG8OOwmLhQj2vjKgM5F9owZKdY_RMFvZrTj5CPf7POnRthd-gAeTj5J_xaXvV016OTY5JoUaR4E1x_9WgTJy2B_Uo5no0SAZMpLFImOk2uIr49aNLrujvWPMCSsPw6YXNXfaEWDNmiJ9qDCr1Qjar4b3teS0a9OrRRQCy01zkLmBfCPcfqbfEmo0b5mf0gqGTmXGXl24Ji0P-bmq7eAeuEfT-Rbh6a7wstcRAgX7jwxOVUgwiO56IjMZ7SgWSg8ZTAxphqE7i0lWZnwrw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"catalogId\": \"apparel-catalog\",\r\n  \"categoryId\": \"mens\",\r\n  \"position\": 1,\r\n  \"productId\": \"apple-ipod-shuffle\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/product/catalogs/v1/organizations/{{organizationId}}/catalogs/storefront-catalog-m-en/categories?limit=50",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"product",
+								"catalogs",
+								"v1",
+								"organizations",
+								"{{organizationId}}",
+								"catalogs",
+								"storefront-catalog-m-en",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "50"
+								},
+								{
+									"key": "offset",
+									"value": "50",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Create new product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiMjViY2ExNDUtZjIyYS00OGY0LWI5MDMtNmRlMGY4ZmY5ZmIyLTI3MDEyMDc3OCIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6IjJrUnMyN3BqdEFwUHZJTXByMnNWallmNDRHVSIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY1ODg5MDg1NiwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOnp6YXNfMDI5IiwibWFpbCIsInRlbmFudEZpbHRlciIsInNmY2MucHJvZHVjdHMucnciLCJwcm9maWxlIiwicm9sZXMiXSwiYXV0aF90aW1lIjoxNjU4ODkwODU2LCJyZWFsbSI6Ii8iLCJleHAiOjE2NTg4OTI2NTYsImlhdCI6MTY1ODg5MDg1NiwiZXhwaXJlc19pbiI6MTgwMCwianRpIjoiRFdSNzdva2wyN0JhNDllYUVCeFdNaWVUYUZRIiwiY2xpZW50X2lkIjoiNGNiYmZmNWMtNTdiOS00YTljLWExYzItOGQ0MDM1NTg0YTM1IiwidGVuYW50RmlsdGVyIjoiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEk6YmRsd19kZXYsYmRsd19wcmQsenphc18wMjkiLCJyb2xlcyI6WyJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSSIsIkFNX0FQSV9BRE1JTiJdfQ.DDOcBAak3vqz3u_F3ARHMjHhoL2fK5tgToUNubCMolRiEo8xNpnfqT9wEEEQPeBsSG-EyRagoSOM0hUvgMj3v1VI0YU4JUxFydw9HEXOdPipQTI60NkqtRgW3mGFZEhkhpabvEO8Ok2ggKP1XUGXQFDgzIj2Cv6McRHHnMqHYe9WhNdkb8fn-PXv8ECfhrtP5JcH9ENKj3VSDL9ozVygnZIMBrtDYRZHiy1xG1zT6aU-38GjcBt0yj1PNab_MRTCdmDOCgtkuyIeLS0dMJl3XGgGrAEJ0QynZkLOn35NegZw1LmeuQoxfLfIkmtHrl1LUvaT4zXsAl87r1XCTCCGSg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignedCategories\": [\r\n    {\r\n      \"catalogId\": \"apparel-catalog\",\r\n      \"categoryId\": \"mens-accessories\"\r\n    },\r\n    {\r\n      \"catalogId\": \"storefront-catalog-en\",\r\n      \"categoryId\": \"top-seller\"\r\n    },\r\n    {\r\n      \"catalogId\": \"storefront-catalog-en\",\r\n      \"categoryId\": \"electronics-gaming\"\r\n    }\r\n  ],\r\n  \"brand\": \"Mango\",\r\n  \"classificationCategory\": {\r\n    \"catalogId\": \"storefront-catalog-en\",\r\n    \"categoryId\": \"top-seller\"\r\n  },\r\n  \"creationDate\": \"2019-02-21T22:10:02.000Z\",\r\n  \"id\": \"mango-ipod-classic\",\r\n  \"image\": {\r\n    \"absUrl\": \"https://example.com/images/large/ipod-classic-silver.jpg\",\r\n    \"alt\": {\r\n      \"default\": \"Mango iPod Classic, , large\"\r\n    },\r\n    \"path\": \"large/mango-classic-silver.jpg\",\r\n    \"title\": {\r\n      \"default\": \"Mango iPod Classic, \"\r\n    }\r\n  },\r\n  \"imageGroups\": [\r\n    {\r\n      \"images\": [\r\n        {\r\n          \"absUrl\": \"https://example.com/images/large/mango-classic-silver.jpg\",\r\n          \"alt\": {\r\n            \"default\": \"Mango iPod Classic, , large\"\r\n          },\r\n          \"path\": \"large/ipod-classic-silver.jpg\",\r\n          \"title\": {\r\n            \"default\": \"Mango iPod Classic, \"\r\n          }\r\n        }\r\n      ],\r\n      \"viewType\": \"large\"\r\n    },\r\n    {\r\n      \"images\": [\r\n        {\r\n          \"absUrl\": \"https://example.com/images/medium/ipod-classic-silver.jpg\",\r\n          \"alt\": {\r\n            \"default\": \"Mango iPod Classic, , medium\"\r\n          },\r\n          \"path\": \"medium/ipod-classic-silver.jpg\",\r\n          \"title\": {\r\n            \"default\": \"Mango iPod Classic, \"\r\n          }\r\n        }\r\n      ],\r\n      \"viewType\": \"medium\"\r\n    },\r\n    {\r\n      \"images\": [\r\n        {\r\n          \"absUrl\": \"https://example.com/images/small/ipod-classic-silver.jpg\",\r\n          \"alt\": {\r\n            \"default\": \"Mango iPod Classic, , small\"\r\n          },\r\n          \"path\": \"small/ipod-classic-silver.jpg\",\r\n          \"title\": {\r\n            \"default\": \"Mango iPod Classic, \"\r\n          }\r\n        }\r\n      ],\r\n      \"viewType\": \"small\"\r\n    }\r\n  ],\r\n  \"lastModified\": \"2019-08-28T18:49:09.000Z\",\r\n  \"localizedTaxClassId\": {\r\n    \"de\": \"exempt\",\r\n    \"default\": \"standard\",\r\n    \"en-US\": \"exempt\"\r\n  },\r\n  \"longDescription\": {\r\n    \"default\": {\r\n      \"markup\": \"Supports MP3, MP3 VBR, AAC, Protected AAC, Audible 2, 3 and 4, Mango Lossless and AIFF audio formats; also supports JPEG, BMP, GIF, TIFF, PSD (Mac only) and PNG image formats and H.264 (high-definition), MPEG-4 and MPEG-4 video formats\",\r\n      \"source\": \"Supports MP3, MP3 VBR, AAC, Protected AAC, Audible 2, 3 and 4, Mango Lossless and AIFF audio formats; also supports JPEG, BMP, GIF, TIFF, PSD (Mac only) and PNG image formats and H.264 (high-definition), MPEG-4 and MPEG-4 video formats\"\r\n    }\r\n  },\r\n  \"name\": {\r\n    \"default\": \"Mango iPod Classic\"\r\n  },\r\n  \"onlineFlag\": {\r\n    \"default\": true\r\n  },\r\n  \"owningCatalogId\": \"electronics-catalog\",\r\n  \"owningCatalogName\": {\r\n    \"default\": \"Electronics Master Catalog\"\r\n  },\r\n  \"pageDescription\": {\r\n    \"default\": \"This iPod delivers everything you love about iPod with added features all wrapped in a tiny 4.9 oz. package. With 120GB of storage and up to 36 hours music playback, iPod classic lets you enjoy up to 30,000 songs or 150 hours of video — or a combination — wherever you go.\"\r\n  },\r\n  \"pageKeywords\": {\r\n    \"default\": \"Mango, iPod, iPod Classic, MP3, Music Player\"\r\n  },\r\n  \"pageTitle\": {\r\n    \"default\": \"Mango iPod Nano\"\r\n  },\r\n  \"primaryCategories\": [\r\n    {\r\n      \"catalogId\": \"apparel-catalog\",\r\n      \"categoryId\": \"mens-accessories\"\r\n    },\r\n    {\r\n      \"catalogId\": \"storefront-catalog-en\",\r\n      \"categoryId\": \"top-seller\"\r\n    }\r\n  ],\r\n  \"primaryCategoryId\": \"top-seller\",\r\n  \"searchable\": {\r\n    \"default\": true\r\n  },\r\n  \"shortDescription\": {\r\n    \"default\": {\r\n      \"markup\": \"This iPod delivers everything you love about iPod with added features all wrapped in a tiny 4.9 oz. package. With 120GB of storage and up to 36 hours music playback, iPod classic lets you enjoy up to 30,000 songs or 150 hours of video — or a combination — wherever you go.\",\r\n      \"source\": \"This iPod delivers everything you love about iPod with added features all wrapped in a tiny 4.9 oz. package. With 120GB of storage and up to 36 hours music playback, iPod classic lets you enjoy up to 30,000 songs or 150 hours of video — or a combination — wherever you go.\"\r\n    }\r\n  },\r\n  \"taxClassId\": \"standard\",\r\n  \"type\": {\r\n    \"master\": true\r\n  },\r\n  \"validFrom\": {\r\n    \"default\": \"1998-05-03T00:00:00.000Z\",\r\n    \"default@SiteGenesis\": \"1998-05-11T00:00:00.000Z\"\r\n  },\r\n  \"validTo\": {\r\n    \"default\": \"2028-07-03T00:00:00.000Z\",\r\n    \"default@SiteGenesis\": \"2028-05-30T00:03:00.000Z\"\r\n  },\r\n  \"variants\": [\r\n    {\r\n      \"productId\": \"mango-ipod-classic-silver-120g\",\r\n      \"variationValues\": {\r\n        \"color\": \"Silver\",\r\n        \"memorySize\": \"120 GB\"\r\n      }\r\n    },\r\n    {\r\n      \"productId\": \"mango-ipod-classic-black-120g\",\r\n      \"variationValues\": {\r\n        \"color\": \"Black\",\r\n        \"memorySize\": \"120 GB\"\r\n      }\r\n    }\r\n  ],\r\n  \"variationAttributes\": [\r\n    {\r\n      \"attributeDefinitionId\": \"color\",\r\n      \"attributeDefinitionName\": {\r\n        \"default\": \"Color\"\r\n      },\r\n      \"id\": \"color\",\r\n      \"name\": {\r\n        \"default\": \"Color\"\r\n      },\r\n      \"shared\": true,\r\n      \"slicing\": false,\r\n      \"values\": [\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Silver\"\r\n          },\r\n          \"position\": 1,\r\n          \"value\": \"Silver\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Black\"\r\n          },\r\n          \"position\": 2,\r\n          \"value\": \"Black\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Purple\"\r\n          },\r\n          \"position\": 3,\r\n          \"value\": \"Purple\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Blue\"\r\n          },\r\n          \"position\": 4,\r\n          \"value\": \"Blue\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Green\"\r\n          },\r\n          \"position\": 5,\r\n          \"value\": \"Green\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Yellow\"\r\n          },\r\n          \"position\": 6,\r\n          \"value\": \"Yellow\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Orange\"\r\n          },\r\n          \"position\": 7,\r\n          \"value\": \"Orange\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Red\"\r\n          },\r\n          \"position\": 8,\r\n          \"value\": \"Red\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"Fuscia\"\r\n          },\r\n          \"position\": 9,\r\n          \"value\": \"Fuscia\"\r\n        }\r\n      ],\r\n      \"variationAttributeType\": \"string\"\r\n    },\r\n    {\r\n      \"attributeDefinitionId\": \"memorySize\",\r\n      \"attributeDefinitionName\": {\r\n        \"default\": \"Memory Size\"\r\n      },\r\n      \"id\": \"memorySize\",\r\n      \"name\": {\r\n        \"default\": \"Memory Size\"\r\n      },\r\n      \"shared\": true,\r\n      \"slicing\": false,\r\n      \"values\": [\r\n        {\r\n          \"name\": {\r\n            \"default\": \"1 GB\"\r\n          },\r\n          \"position\": 1,\r\n          \"value\": \"1 GB\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"2 GB\"\r\n          },\r\n          \"position\": 2,\r\n          \"value\": \"2 GB\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"8 GB\"\r\n          },\r\n          \"position\": 3,\r\n          \"value\": \"8 GB\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"16 GB\"\r\n          },\r\n          \"position\": 4,\r\n          \"value\": \"16 GB\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"32 GB\"\r\n          },\r\n          \"position\": 5,\r\n          \"value\": \"32 GB\"\r\n        },\r\n        {\r\n          \"name\": {\r\n            \"default\": \"120 GB\"\r\n          },\r\n          \"position\": 6,\r\n          \"value\": \"120 GB\"\r\n        }\r\n      ],\r\n      \"variationAttributeType\": \"string\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/product/products/v1/organizations/{{organizationId}}/products/mango-ipod-classic",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"product",
+								"products",
+								"v1",
+								"organizations",
+								"{{organizationId}}",
+								"products",
+								"mango-ipod-classic"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Zone calls",
+			"item": [
+				{
+					"name": "Get Zone Info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiOGYxNWRiMmYtNjc0Ni00YjQ0LWI4ODYtNjQ4YjJkZTg4OWFiLTMxNDQyMjA3NyIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6IktaMkRfUktoLUZGRThYUWFBNDVON3pjQlpSMCIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY2ODExOTk2MywiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfZGV2IiwibWFpbCIsInNmY2MuY2RuLXpvbmVzLnJ3IiwidGVuYW50RmlsdGVyIiwicHJvZmlsZSIsInJvbGVzIl0sImF1dGhfdGltZSI6MTY2ODExOTk2MywicmVhbG0iOiIvIiwiZXhwIjoxNjY4MTIxNzYzLCJpYXQiOjE2NjgxMTk5NjMsImV4cGlyZXNfaW4iOjE4MDAsImp0aSI6IklER3VOWTZYbVlldHEzS0ozNGIwXzNJSm1XOCIsImNsaWVudF9pZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsInRlbmFudEZpbHRlciI6IlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfZGV2LGJkbHdfcHJkLGJkbHdfc3RnLHp6YXNfMDI5Iiwicm9sZXMiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEkiLCJBTV9BUElfQURNSU4iXX0.evHy_xWIVu7_cUeyDnoyYmyK_h9M9kpr1puNDXCvBZYHSHxWCaEKu9zJNOr6BRAOTqoVDygMMNswxgFAaQvfKRVxT5I-SB2Cv1gVLXM2B9-fd7LhD0ubhyf4h_j2ua2jdSgNlzH6_QKt0fuGai9GXYQtkgV4Ya-jt35uD6T59hBq15ulpPVl19kT6Q3zVX_a96qo1q-5IlNXrtEfZcgl7OuwSUn4gYwZw_ubRBm6xy0_eblEsvnPfwWRoXLXHSPDJg_isLBFxiwmVd0pvTZxeyTlu9pAbbA8m4XMEdv5mmXdRYos_y6vCZ-8uNMu_aENj-EmUmZScf3WNM_qoPXbjA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/cdn/zones/{{version}}/organizations/{{organizationId}}/zones/info",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"zones",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"zones",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get WAF Groups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiZDMxZTJhZTMtNjIxNy00ZDRmLTg1OGMtNjQyYTFlZjZjYjY4LTE4NzE3NDUzOSIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6IkpLanpqcjRDaVBOa095dTlMR1RDcTdKYmc1USIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY0OTg1OTUzMCwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfcHJkIiwibWFpbCIsInNmY2MuY2RuLXpvbmVzLnJ3IiwidGVuYW50RmlsdGVyIiwicHJvZmlsZSIsInJvbGVzIl0sImF1dGhfdGltZSI6MTY0OTg1OTUzMCwicmVhbG0iOiIvIiwiZXhwIjoxNjQ5ODYxMzMwLCJpYXQiOjE2NDk4NTk1MzAsImV4cGlyZXNfaW4iOjE4MDAsImp0aSI6Ik1pS1Y0ZXhRQ2lsZHFPamVUcWRqWVQtcVU3TSIsImNsaWVudF9pZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsInRlbmFudEZpbHRlciI6IlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfZGV2LGJkbHdfcHJkLHp6YXNfMDI5Iiwicm9sZXMiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEkiLCJBTV9BUElfQURNSU4iXX0.ZoBP3epoAWJL4puFPQQyAlPbTsZ6ShGetHIbdUyPgkGOLmKRKuQnVb4oS6DFbBz427N-BcKhoJ0UVOCniqDOQ1zphsFh1iine9gQR8gCVE9u3alsrGXs8S6gCXIbEbohStfiUCiVXmfj72CRGp9LDPqiezE8vEstea9bmXicMZYiK2H8mhyojm51m54nDr35SUt0VSftg9IRCSCCzhZgyOnIFHw6LL7toyL8qyg1NDmjuQS-ROSsc72PLFXTfWh3oVANOS7DedC6hxE-pDC0S_MUdosMSzC3JtXkE-Y000UTyZpfU7kVzCMg_G6TUdUzozXqF12TqphuFmcYQWnbNg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/cdn/zones/{{version}}/organizations/{{organizationId}}/zones/09bd3600e7d2d209192d6e43fdcf21fd/waf/groups",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"zones",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"zones",
+								"09bd3600e7d2d209192d6e43fdcf21fd",
+								"waf",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get WAF Rules",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiZDMxZTJhZTMtNjIxNy00ZDRmLTg1OGMtNjQyYTFlZjZjYjY4LTE4NzE3NDUzOSIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6IkpLanpqcjRDaVBOa095dTlMR1RDcTdKYmc1USIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY0OTg1OTUzMCwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfcHJkIiwibWFpbCIsInNmY2MuY2RuLXpvbmVzLnJ3IiwidGVuYW50RmlsdGVyIiwicHJvZmlsZSIsInJvbGVzIl0sImF1dGhfdGltZSI6MTY0OTg1OTUzMCwicmVhbG0iOiIvIiwiZXhwIjoxNjQ5ODYxMzMwLCJpYXQiOjE2NDk4NTk1MzAsImV4cGlyZXNfaW4iOjE4MDAsImp0aSI6Ik1pS1Y0ZXhRQ2lsZHFPamVUcWRqWVQtcVU3TSIsImNsaWVudF9pZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsInRlbmFudEZpbHRlciI6IlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfZGV2LGJkbHdfcHJkLHp6YXNfMDI5Iiwicm9sZXMiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEkiLCJBTV9BUElfQURNSU4iXX0.ZoBP3epoAWJL4puFPQQyAlPbTsZ6ShGetHIbdUyPgkGOLmKRKuQnVb4oS6DFbBz427N-BcKhoJ0UVOCniqDOQ1zphsFh1iine9gQR8gCVE9u3alsrGXs8S6gCXIbEbohStfiUCiVXmfj72CRGp9LDPqiezE8vEstea9bmXicMZYiK2H8mhyojm51m54nDr35SUt0VSftg9IRCSCCzhZgyOnIFHw6LL7toyL8qyg1NDmjuQS-ROSsc72PLFXTfWh3oVANOS7DedC6hxE-pDC0S_MUdosMSzC3JtXkE-Y000UTyZpfU7kVzCMg_G6TUdUzozXqF12TqphuFmcYQWnbNg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/cdn/zones/{{version}}/organizations/{{organizationId}}/zones/8fb39938a0383ce10f2d223d10c423ef/waf/rules",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"zones",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"zones",
+								"8fb39938a0383ce10f2d223d10c423ef",
+								"waf",
+								"rules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Firewall Rules",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiZDMxZTJhZTMtNjIxNy00ZDRmLTg1OGMtNjQyYTFlZjZjYjY4LTIwMjYwNjQyOCIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6Im4yS0tTX2wtSnh3T25SNTJjWFRVem1HXzcxSSIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY0OTk2MTg1NCwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfcHJkIiwibWFpbCIsInNmY2MuY2RuLXpvbmVzLnJ3IiwidGVuYW50RmlsdGVyIiwicHJvZmlsZSIsInJvbGVzIl0sImF1dGhfdGltZSI6MTY0OTk2MTg1NCwicmVhbG0iOiIvIiwiZXhwIjoxNjQ5OTYzNjU0LCJpYXQiOjE2NDk5NjE4NTQsImV4cGlyZXNfaW4iOjE4MDAsImp0aSI6Ijl1T3JnZEFjS3VwNEhUcXNMa1B3TmV5czFVVSIsImNsaWVudF9pZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsInRlbmFudEZpbHRlciI6IlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfZGV2LGJkbHdfcHJkLHp6YXNfMDI5Iiwicm9sZXMiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEkiLCJBTV9BUElfQURNSU4iXX0.WfMN08CWqCupqwBq0bEOqIXpexT3wVRwKnyDEHPR2HrD_bt6oQTpreo_6S1LTnAZSVZjmBQmAhw4VZuarrmKn0CRJ8XDzX_3Fdyj1V44-NppLiM-QvbDrP65rlt2jphXPWWpDtnbHJ2SAMQTViQfEUMuDg5konb57_oI6dXBEJeLiRPNBCmKMgiDaAEtcjKznERtVkfm7onBVBc2XZNXQH6arridI3QnzzIYeGg5qyeb5d_M8KNhMEbrRQ-bCZkulGvSp03LM9bht5tEu58rBrnJP8Onu9_ZLvkh3PFs6I812CskLdUqOZoLRg51LSs2ectoOjUicveTElcEpKvBYA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/cdn/zones/{{version}}/organizations/{{organizationId}}/zones/09bd3600e7d2d209192d6e43fdcf21fd/firewall/rules",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"zones",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"zones",
+								"09bd3600e7d2d209192d6e43fdcf21fd",
+								"firewall",
+								"rules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Zone Speed Settings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiNDNkODgyZTktNTEzMC00ZDQ4LTgxZDQtZDExMDFjZWQ4YzgwLTczNjMyODAzIiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50LmRlbWFuZHdhcmUuY29tOjQ0My9kd3Nzby9vYXV0aDIiLCJ0b2tlbk5hbWUiOiJhY2Nlc3NfdG9rZW4iLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwiYXV0aEdyYW50SWQiOiJMdGVtU29QUFowN25SX1FNbDNYODdPYnZwVEEiLCJhdWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJuYmYiOjE2MjEwMjUzMTUsImdyYW50X3R5cGUiOiJjbGllbnRfY3JlZGVudGlhbHMiLCJzY29wZSI6WyJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldiIsIm1haWwiLCJzZmNjLmNkbi16b25lcy5ydyIsInRlbmFudEZpbHRlciIsInByb2ZpbGUiLCJyb2xlcyJdLCJhdXRoX3RpbWUiOjE2MjEwMjUzMTUsInJlYWxtIjoiLyIsImV4cCI6MTYyMTAyNzExNSwiaWF0IjoxNjIxMDI1MzE1LCJleHBpcmVzX2luIjoxODAwLCJqdGkiOiJHVHhBV2FzYnZXLWFWV291ak5XcVFDOXdieEUiLCJjbGllbnRfaWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJ0ZW5hbnRGaWx0ZXIiOiJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldixiZGx3X3ByZCx6emFzXzAyOSIsInJvbGVzIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJIiwiQU1fQVBJX0FETUlOIl19.Ta2gjR17ee0Di_xQt0F2K0-VBRxIspraC6VXQBJBrL7oZNdtzisb27H9mnuxYgc3CKntfeQhj5UeVlOGhw33ej_T4lTZZ58IsJpyQksZMRUHYRAvumGgEKAd4c4pDKsVSzwhod4ovOLAOm-B9o1YE9QBqkHi1_qMlBe8Dt30tT4TnA7gqAthT3UddvbnI3Kz1VbA5F_byTspzlnLA14RNotOY8WpRHMLR2bONa0W0Tb9FADNTa49ycbV9xuzOYYJklGSq732FHV2CDETwi-erRLzQMJFPgygRtpaL74Ynu5XPdyN4idmKrMBPa7SKEJwEi3ihZce177l3iSoHLIyYQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/cdn/zones/{{version}}/organizations/{{organizationId}}/zones/8fb39938a0383ce10f2d223d10c423ef/speed-settings",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"zones",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"zones",
+								"8fb39938a0383ce10f2d223d10c423ef",
+								"speed-settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Certificate Information",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiNDNkODgyZTktNTEzMC00ZDQ4LTgxZDQtZDExMDFjZWQ4YzgwLTczNjMyODAzIiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50LmRlbWFuZHdhcmUuY29tOjQ0My9kd3Nzby9vYXV0aDIiLCJ0b2tlbk5hbWUiOiJhY2Nlc3NfdG9rZW4iLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwiYXV0aEdyYW50SWQiOiJMdGVtU29QUFowN25SX1FNbDNYODdPYnZwVEEiLCJhdWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJuYmYiOjE2MjEwMjUzMTUsImdyYW50X3R5cGUiOiJjbGllbnRfY3JlZGVudGlhbHMiLCJzY29wZSI6WyJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldiIsIm1haWwiLCJzZmNjLmNkbi16b25lcy5ydyIsInRlbmFudEZpbHRlciIsInByb2ZpbGUiLCJyb2xlcyJdLCJhdXRoX3RpbWUiOjE2MjEwMjUzMTUsInJlYWxtIjoiLyIsImV4cCI6MTYyMTAyNzExNSwiaWF0IjoxNjIxMDI1MzE1LCJleHBpcmVzX2luIjoxODAwLCJqdGkiOiJHVHhBV2FzYnZXLWFWV291ak5XcVFDOXdieEUiLCJjbGllbnRfaWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJ0ZW5hbnRGaWx0ZXIiOiJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldixiZGx3X3ByZCx6emFzXzAyOSIsInJvbGVzIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJIiwiQU1fQVBJX0FETUlOIl19.Ta2gjR17ee0Di_xQt0F2K0-VBRxIspraC6VXQBJBrL7oZNdtzisb27H9mnuxYgc3CKntfeQhj5UeVlOGhw33ej_T4lTZZ58IsJpyQksZMRUHYRAvumGgEKAd4c4pDKsVSzwhod4ovOLAOm-B9o1YE9QBqkHi1_qMlBe8Dt30tT4TnA7gqAthT3UddvbnI3Kz1VbA5F_byTspzlnLA14RNotOY8WpRHMLR2bONa0W0Tb9FADNTa49ycbV9xuzOYYJklGSq732FHV2CDETwi-erRLzQMJFPgygRtpaL74Ynu5XPdyN4idmKrMBPa7SKEJwEi3ihZce177l3iSoHLIyYQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/cdn/zones/{{version}}/organizations/{{organizationId}}/zones/8fb39938a0383ce10f2d223d10c423ef/certificates",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"zones",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"zones",
+								"8fb39938a0383ce10f2d223d10c423ef",
+								"certificates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Allowlist IPs",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiMjRjMjc2NmUtZGU4Mi00Yzk0LTkyMzctY2QwY2UxODI3NmY0LTQ1MTA4OTgyNiIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6IkxQMVNEY3J0aXBRRXFoZVkzenh6M3loWkpPWSIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY2NDQ5NzU3NCwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIm1haWwiLCJzZmNjLmNkbi16b25lcy5ydyIsInRlbmFudEZpbHRlciIsInByb2ZpbGUiLCJyb2xlcyIsIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfc3RnIl0sImF1dGhfdGltZSI6MTY2NDQ5NzU3NCwicmVhbG0iOiIvIiwiZXhwIjoxNjY0NDk5Mzc0LCJpYXQiOjE2NjQ0OTc1NzQsImV4cGlyZXNfaW4iOjE4MDAsImp0aSI6IkNTU20tbGx6MDg0TWhLdkJIWkZVNU1oVFJmMCIsImNsaWVudF9pZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsInRlbmFudEZpbHRlciI6IlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfZGV2LGJkbHdfcHJkLGJkbHdfc3RnLHp6YXNfMDI5Iiwicm9sZXMiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEkiLCJBTV9BUElfQURNSU4iXX0.Uq69HCFXPEB3KwndUD2gWAdOYXs5UAA44uxGajIo_Zhjq-7o1bTFVIL6B5ScKepTbEZe_-Z_7ORro52hr6GW-dmDtCiZZCoUxMLXIFnKirYyOiaAWMKlsNT6KNNfoPJuNVp1AzP-4qboAuCcMfcU2fikjideBd3yRSXP4uDqgC13lGKyBBF-fN0ZimWvMfVmriIxuGsSxNsw3GCqhSZkyFeRZVHTiyhwesrCKm1yfCi3ABF4BlMxOhaxtG7QJm9Nc_E3RgwgiNRJ-mVxLVUHurClgmtQ9r1Q5SP8GxatoGfKXJc_XIUtSThqZ4SHqgWgk6fTGjbRFimu9TimzjrtWw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"action\": \"blocklist\",\n  \"type\": \"ip\",\n  \"values\": [\n    \"209.68.9.130\"\n  ]\n}"
+						},
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/cdn/zones/{{version}}/organizations/{{organizationId}}/zones/556f984a1a1f2f6ab4c473ac45f47112/firewall/rules",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"zones",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"zones",
+								"556f984a1a1f2f6ab4c473ac45f47112",
+								"firewall",
+								"rules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Firewall Rule",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiZDMxZTJhZTMtNjIxNy00ZDRmLTg1OGMtNjQyYTFlZjZjYjY4LTIwMjY3MjUwMyIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6ImtPQUF0MHI3eGw2Q2F3b2VEYk41X0FRekxzQSIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY0OTk2MjM1MywiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfcHJkIiwibWFpbCIsInNmY2MuY2RuLXpvbmVzLnJ3IiwidGVuYW50RmlsdGVyIiwicHJvZmlsZSIsInJvbGVzIl0sImF1dGhfdGltZSI6MTY0OTk2MjM1MywicmVhbG0iOiIvIiwiZXhwIjoxNjQ5OTY0MTUzLCJpYXQiOjE2NDk5NjIzNTMsImV4cGlyZXNfaW4iOjE4MDAsImp0aSI6IkFRVGEyalpkYklnX1lMREpCLVJhYkprS1RtbyIsImNsaWVudF9pZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsInRlbmFudEZpbHRlciI6IlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfZGV2LGJkbHdfcHJkLHp6YXNfMDI5Iiwicm9sZXMiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEkiLCJBTV9BUElfQURNSU4iXX0.VUegMSpo9S26PIiUA4z_fch1AM6yu4gXxCvLpiQKVClg6HaElSELKEiik9d19eyzp02aeccpWoZLAGe58HCODx-oJdmNceTY1GLyEYKLv23VtXgUWuZBV6TO-pzkyCD2FkYkm9OUIaS7txA9W23jUFStYPwOCW_1ySM1Zq9GFS5OfFtoqMJOei41hNlzd0wpAsF1havDQOKej_Ph4vEo8w8p01ubkwe-XzADL2vufQnTVSi6B-guo9tdJ93yGniublmbPVpREso7JMUp8uQe_vVZAMO58Pkbjz2p3n96k75ZNxxuRjoobw3ffm5gGbQ3xiiu92kRn7sJmAgaL75QDQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/cdn/zones/{{version}}/organizations/{{organizationId}}/zones/09bd3600e7d2d209192d6e43fdcf21fd/firewall/rules/9fb4433360c24626b727638075ac634e",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"zones",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"zones",
+								"09bd3600e7d2d209192d6e43fdcf21fd",
+								"firewall",
+								"rules",
+								"9fb4433360c24626b727638075ac634e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Zone",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiOTc3NmYyOTctZGE5Ny00MWI1LWI1OWEtZGRjYzI3ZWRlYWYxLTQzODk3ODA4MiIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6Ik1DWFhZMzZLeWluZEdJVmpvOHVXWTNZcDJHYyIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY2NDMyMTg1MSwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIm1haWwiLCJzZmNjLmNkbi16b25lcy5ydyIsInRlbmFudEZpbHRlciIsInByb2ZpbGUiLCJyb2xlcyIsIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfc3RnIl0sImF1dGhfdGltZSI6MTY2NDMyMTg1MSwicmVhbG0iOiIvIiwiZXhwIjoxNjY0MzIzNjUxLCJpYXQiOjE2NjQzMjE4NTEsImV4cGlyZXNfaW4iOjE4MDAsImp0aSI6IldYT2JHdVB6WC0xZjJ1MzR5enQyZlkzdWhuMCIsImNsaWVudF9pZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsInRlbmFudEZpbHRlciI6IlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfZGV2LGJkbHdfcHJkLGJkbHdfc3RnLHp6YXNfMDI5Iiwicm9sZXMiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEkiLCJBTV9BUElfQURNSU4iXX0.aFTUkhhulu9P49BXXBE-D3f9wId9g9xfiS7ZP8K1RTW-XY2Ujr9x_YhmKcXvavgtGhgxEieiVNUahvuaTuhOUYR5EnyaWwkSmofY4JNiEU2NtyshIWGXDzLjwINVYGoQgN9b0AtNgrymQ1BXEITc7BVIGAAHNb1rnBj1acYlgpBkZUjPrVc7pCigeXNRT396Gm4_cdAc_eGGhwmA6UrlHbb8OXrbW6vv4_BLTlLBXLmjUkK20i9oukugrpJwUN69tgE_5sribwacJ-DL2WrmosyzS8rmJ8p8iops-9xO9UgPTzegPSJe7-OYfvvr75R_6EyYr02kZQIrXEeQLEQwmw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"domainName\": \"stgrohithtest.com\"\n}"
+						},
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/cdn/zones/{{version}}/organizations/{{organizationId}}/storefront-zones",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"zones",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"storefront-zones"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Einstein Calls",
+			"item": [
+				{
+					"name": "Get einstein recommender id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiOTliYzNkYTQtZDVkZS00YjdhLThiZjEtODg2ZmNlODY3MmFjLTk3ODY5NjYiLCJzdWJuYW1lIjoiNGNiYmZmNWMtNTdiOS00YTljLWExYzItOGQ0MDM1NTg0YTM1IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50LmRlbWFuZHdhcmUuY29tOjQ0My9kd3Nzby9vYXV0aDIiLCJ0b2tlbk5hbWUiOiJhY2Nlc3NfdG9rZW4iLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwiYXV0aEdyYW50SWQiOiJpZzZYS0NPd3p0cEk1Vm9lRXBXZDNBZzc1Y1UiLCJhdWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJuYmYiOjE2NTA0ODI1NDEsImdyYW50X3R5cGUiOiJjbGllbnRfY3JlZGVudGlhbHMiLCJzY29wZSI6WyJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldiIsInNmY2Muc2hvcHBlci1kaXNjb3Zlcnktc2VhcmNoIiwibWFpbCIsInRlbmFudEZpbHRlciIsInByb2ZpbGUiLCJyb2xlcyJdLCJhdXRoX3RpbWUiOjE2NTA0ODI1NDEsInJlYWxtIjoiLyIsImV4cCI6MTY1MDQ4NDM0MSwiaWF0IjoxNjUwNDgyNTQxLCJleHBpcmVzX2luIjoxODAwLCJqdGkiOiJzRDYyRUJaU0Nsb1NHamJnUndmN1dIZkMwUzgiLCJjbGllbnRfaWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJ0ZW5hbnRGaWx0ZXIiOiJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldixiZGx3X3ByZCx6emFzXzAyOSIsInJvbGVzIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJIiwiQU1fQVBJX0FETUlOIl19.RKlvC_YVWzxM_f__-fvN4X8zuIuVLFEIGZVVk0dVh_FAii3fx3bpzgOW4zqC0UogCOi1gtrPEN5RjODhniU7hDPVvXW3_Iptiv9ROmQTESWlqRZ_CPU15YW6nL27Qnoc5Ltgzog4dv96IRs8c8t0BjI7KBzO4KuSPN0ETLEQHyTeRVGhBbCcrORFLo8M4RBKCGIxxBIXTZhb1-cIeYNY7XTucf8d-5GeZhrvO408JSqg9afIAE-Yk6sPVRyh99kxCFyr4vVI4NNMMfJbtJoZIiuS_VlU4hXkyLnfmkaDcwUTkemAMbbROJ7BiXxafjnT_Lpe6MFoAh9ouUFLWreFnw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.cquotient.com/v3/personalization/recs/bdlw-RefArch/product-to-product?clientId=4cbbff5c-57b9-4a9c-a1c2-8d4035584a35",
+							"protocol": "https",
+							"host": [
+								"api",
+								"cquotient",
+								"com"
+							],
+							"path": [
+								"v3",
+								"personalization",
+								"recs",
+								"bdlw-RefArch",
+								"product-to-product"
+							],
+							"query": [
+								{
+									"key": "clientId",
+									"value": "4cbbff5c-57b9-4a9c-a1c2-8d4035584a35"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get einstein recommenders for a given site",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiOTliYzNkYTQtZDVkZS00YjdhLThiZjEtODg2ZmNlODY3MmFjLTk3ODY5NjYiLCJzdWJuYW1lIjoiNGNiYmZmNWMtNTdiOS00YTljLWExYzItOGQ0MDM1NTg0YTM1IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50LmRlbWFuZHdhcmUuY29tOjQ0My9kd3Nzby9vYXV0aDIiLCJ0b2tlbk5hbWUiOiJhY2Nlc3NfdG9rZW4iLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwiYXV0aEdyYW50SWQiOiJpZzZYS0NPd3p0cEk1Vm9lRXBXZDNBZzc1Y1UiLCJhdWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJuYmYiOjE2NTA0ODI1NDEsImdyYW50X3R5cGUiOiJjbGllbnRfY3JlZGVudGlhbHMiLCJzY29wZSI6WyJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldiIsInNmY2Muc2hvcHBlci1kaXNjb3Zlcnktc2VhcmNoIiwibWFpbCIsInRlbmFudEZpbHRlciIsInByb2ZpbGUiLCJyb2xlcyJdLCJhdXRoX3RpbWUiOjE2NTA0ODI1NDEsInJlYWxtIjoiLyIsImV4cCI6MTY1MDQ4NDM0MSwiaWF0IjoxNjUwNDgyNTQxLCJleHBpcmVzX2luIjoxODAwLCJqdGkiOiJzRDYyRUJaU0Nsb1NHamJnUndmN1dIZkMwUzgiLCJjbGllbnRfaWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJ0ZW5hbnRGaWx0ZXIiOiJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldixiZGx3X3ByZCx6emFzXzAyOSIsInJvbGVzIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJIiwiQU1fQVBJX0FETUlOIl19.RKlvC_YVWzxM_f__-fvN4X8zuIuVLFEIGZVVk0dVh_FAii3fx3bpzgOW4zqC0UogCOi1gtrPEN5RjODhniU7hDPVvXW3_Iptiv9ROmQTESWlqRZ_CPU15YW6nL27Qnoc5Ltgzog4dv96IRs8c8t0BjI7KBzO4KuSPN0ETLEQHyTeRVGhBbCcrORFLo8M4RBKCGIxxBIXTZhb1-cIeYNY7XTucf8d-5GeZhrvO408JSqg9afIAE-Yk6sPVRyh99kxCFyr4vVI4NNMMfJbtJoZIiuS_VlU4hXkyLnfmkaDcwUTkemAMbbROJ7BiXxafjnT_Lpe6MFoAh9ouUFLWreFnw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.cquotient.com/v3/personalization/recommenders/bdlw-RefArch?clientId=4cbbff5c-57b9-4a9c-a1c2-8d4035584a35",
+							"protocol": "https",
+							"host": [
+								"api",
+								"cquotient",
+								"com"
+							],
+							"path": [
+								"v3",
+								"personalization",
+								"recommenders",
+								"bdlw-RefArch"
+							],
+							"query": [
+								{
+									"key": "clientId",
+									"value": "4cbbff5c-57b9-4a9c-a1c2-8d4035584a35"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Einstein viewReco",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiZDBmYTgzZTktZDZlNC00ZGJhLThjMDYtMWVmZjM4YzBiMDY2LTY2NDY4MTcwIiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50LmRlbWFuZHdhcmUuY29tOjQ0My9kd3Nzby9vYXV0aDIiLCJ0b2tlbk5hbWUiOiJhY2Nlc3NfdG9rZW4iLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwiYXV0aEdyYW50SWQiOiJldGJKYkVSMzVBdzBxOWtpeXNtQmw1MThtb0kiLCJhdWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJuYmYiOjE2MjA5MjQzMTksImdyYW50X3R5cGUiOiJjbGllbnRfY3JlZGVudGlhbHMiLCJzY29wZSI6WyJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldiIsIm1haWwiLCJzZmNjLmNkbi16b25lcy5ydyIsInRlbmFudEZpbHRlciIsInByb2ZpbGUiLCJyb2xlcyJdLCJhdXRoX3RpbWUiOjE2MjA5MjQzMTksInJlYWxtIjoiLyIsImV4cCI6MTYyMDkyNjExOSwiaWF0IjoxNjIwOTI0MzE5LCJleHBpcmVzX2luIjoxODAwLCJqdGkiOiJFVFcwX0Z0dm9iWmltWTlYOXdVY21raER0X1EiLCJjbGllbnRfaWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJ0ZW5hbnRGaWx0ZXIiOiJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTpiZGx3X2RldixiZGx3X3ByZCx6emFzXzAyOSIsInJvbGVzIjpbIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJIiwiQU1fQVBJX0FETUlOIl19.TiWQxa6-NSLNrjQOPAjRqpbqKVoJ8yULRj6E6fOH2iB3zhe6q2OsqLYwPUVbYhbanu7Dp4chRcxjkndmBDFjP4d7A82bKsbk8nSzkzEq6Ep_r2dIR3VQEz7-t877zzEjuVBonkkJE-_NUYFyL-p1xa6mJSdabhsDLG7S6XyNj7oX_YuCzsWmBtuDef8g5mi4NHDiCxVV43-IGfxPa6Io4n28lkLGLu-81bHODaURa-Xkh4BSBfMExudfuz8eG1eiFBuzHcWMpleRVvJKOJlBTjRKUKtYTjavOgruP_1gQwy_R10ZsrISS7NPAtF5HJ4A1Z8_6M3AxEx50ZIOQWsNnw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api.cquotient.com/v3/activities/bdlw-RefArch/viewReco?clientId=4cbbff5c-57b9-4a9c-a1c2-8d4035584a35",
+							"protocol": "https",
+							"host": [
+								"api",
+								"cquotient",
+								"com"
+							],
+							"path": [
+								"v3",
+								"activities",
+								"bdlw-RefArch",
+								"viewReco"
+							],
+							"query": [
+								{
+									"key": "clientId",
+									"value": "4cbbff5c-57b9-4a9c-a1c2-8d4035584a35"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Coupon Calls",
+			"item": [
+				{
+					"name": "POST Coupons Search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiZmZiYWNlMGUtZmRhOS00ZGM3LTlkODYtM2JkZjg1MzAxMjJmLTE2MDcyMTU3IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50LmRlbWFuZHdhcmUuY29tOjQ0My9kd3Nzby9vYXV0aDIiLCJ0b2tlbk5hbWUiOiJhY2Nlc3NfdG9rZW4iLCJ0b2tlbl90eXBlIjoiQmVhcmVyIiwiYXV0aEdyYW50SWQiOiJTWWV6V2NKYklzQTVjcm1uMHZiVEpPajk2WEEiLCJhdWQiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJuYmYiOjE2Mzk2NzEyODIsImdyYW50X3R5cGUiOiJjbGllbnRfY3JlZGVudGlhbHMiLCJzY29wZSI6WyJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSTp6emFzXzAyOSIsIm1haWwiLCJ0ZW5hbnRGaWx0ZXIiLCJwcm9maWxlIiwicm9sZXMiLCJzZmNjLnByb21vdGlvbnMucnciXSwiYXV0aF90aW1lIjoxNjM5NjcxMjgyLCJyZWFsbSI6Ii8iLCJleHAiOjE2Mzk2NzMwODIsImlhdCI6MTYzOTY3MTI4MiwiZXhwaXJlc19pbiI6MTgwMCwianRpIjoiQUQxZE9tdjF2UUh4elNFZFdTRmx4bHhCbzNFIiwiY2xpZW50X2lkIjoiNGNiYmZmNWMtNTdiOS00YTljLWExYzItOGQ0MDM1NTg0YTM1IiwidGVuYW50RmlsdGVyIjoiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEk6YmRsd19kZXYsYmRsd19wcmQsenphc18wMjkiLCJyb2xlcyI6WyJTQUxFU0ZPUkNFX0NPTU1FUkNFX0FQSSIsIkFNX0FQSV9BRE1JTiJdfQ.I0Yrl95gMve7eukoqQF78sRMkGRLJ-dyqkqCVB9dz9m2o7WRXWhRDUA3L6A5yIyY-ts-m-F0O1YyayAoG-ad9w6cxcBw-7iCa7rvBYucry1LmnggO6evbhD2Hlgd2vXnPOiFCOTrhqBVJaA3qNsw5GHdgVjWLHn8cLuzTWIAkRVR4nyZ6HW4I7vSsSbpGuwdbgBD_FMNvCG_s6KSt8S6dQ8yuLrglzhGSAM8OW8iIjYj8YeoAulXrP8TVKZB54b0GUx06QuUPT9DWk2z1M6HRVkmuEUQsBDkFoNZ-YnB_9rBGFYfjy3Dn7wCdSAZr00-GBmRXdQskLNg2MuYT_UShg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"limit\" : 4,\n  \"query\" : {\n    \"textQuery\": {\n      \"fields\": [\"id\",\"description\"],\n       \"searchPhrase\": \"5ties\"\n    }\n  },\n  \"offset\" : 2\n}\n"
+						},
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/pricing/coupons/{{version}}/organizations/{{organizationId}}/coupons?siteId=RefArch",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"pricing",
+								"coupons",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"coupons"
+							],
+							"query": [
+								{
+									"key": "siteId",
+									"value": "RefArch"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "STG eCDN",
+			"item": [
+				{
+					"name": "Oauth2 get Client token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var tokenData = JSON.parse(responseBody);",
+									"",
+									"if(tokenData.access_token!==null && tokenData.token_type!==null ){",
+									"    postman.setEnvironmentVariable(\"Authorization_key\", tokenData.token_type + \" \" + tokenData.access_token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "4cbbff5c-57b9-4a9c-a1c2-8d4035584a35",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "Commercecloud@2020",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic NGNiYmZmNWMtNTdiOS00YTljLWExYzItOGQ0MDM1NTg0YTM1OkNvbW1lcmNlY2xvdWRAMjAyMA==",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "SALESFORCE_COMMERCE_API:{{tenant}} sfcc.cdn-zones.rw",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://account.demandware.com/dw/oauth2/access_token",
+							"protocol": "https",
+							"host": [
+								"account",
+								"demandware",
+								"com"
+							],
+							"path": [
+								"dw",
+								"oauth2",
+								"access_token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Zone Info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiNGIxYWJjY2EtNzczNS00ZTJjLTkzYTMtNmQ3ZmJlMzJkODc2LTM4NTU5MTk5NSIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6IlhtMmg5c0tnR3FjZHdOTjBQNFRlbFd6N09VdyIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY2ODEyMDU1NCwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIm1haWwiLCJzZmNjLmNkbi16b25lcy5ydyIsInRlbmFudEZpbHRlciIsInByb2ZpbGUiLCJyb2xlcyIsIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfc3RnIl0sImF1dGhfdGltZSI6MTY2ODEyMDU1NCwicmVhbG0iOiIvIiwiZXhwIjoxNjY4MTIyMzU0LCJpYXQiOjE2NjgxMjA1NTQsImV4cGlyZXNfaW4iOjE4MDAsImp0aSI6IkJ0cnRFLWxJbk1kVDJNdnl5S01kTlYtSFpNVSIsImNsaWVudF9pZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsInRlbmFudEZpbHRlciI6IlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfZGV2LGJkbHdfcHJkLGJkbHdfc3RnLHp6YXNfMDI5Iiwicm9sZXMiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEkiLCJBTV9BUElfQURNSU4iXX0.MAjsfJum_s_4mVbLKyejZZ0_lnnE_wv2g5xFOwgbi8lOQx7N9ZDQvOLcVsICEnGQM99laTctGR6YIlEVHTfXr-cnF0rbqfCIai47IOi6FMfDxrHGaxPcmSPgdzfGdFBsAr23cslEiTIjoX0DQe-qYL1w4Ic_00WhGfE08MaJkTrU_I3XmRD0QG05J2tpDSsm3UvXbKPGZgd5TmMCDH5yNxsqPOsTHma4SjdslqCmEEIaaxHfCDB8nqWDXM_FIYs5CU1mjAAwVMsNXoqOPPLIonszL8CFFkgLvjPffGWzIjsOFgqJH3XPGrh8EIsHxFYgUSYHj5-fs-bD6EeugIUA1A",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/cdn/zones/{{version}}/organizations/{{organizationId}}/zones/info",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"zones",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"zones",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Zone",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiNGIxYWJjY2EtNzczNS00ZTJjLTkzYTMtNmQ3ZmJlMzJkODc2LTM4NTU5MTk5NSIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6IlhtMmg5c0tnR3FjZHdOTjBQNFRlbFd6N09VdyIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY2ODEyMDU1NCwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIm1haWwiLCJzZmNjLmNkbi16b25lcy5ydyIsInRlbmFudEZpbHRlciIsInByb2ZpbGUiLCJyb2xlcyIsIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfc3RnIl0sImF1dGhfdGltZSI6MTY2ODEyMDU1NCwicmVhbG0iOiIvIiwiZXhwIjoxNjY4MTIyMzU0LCJpYXQiOjE2NjgxMjA1NTQsImV4cGlyZXNfaW4iOjE4MDAsImp0aSI6IkJ0cnRFLWxJbk1kVDJNdnl5S01kTlYtSFpNVSIsImNsaWVudF9pZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsInRlbmFudEZpbHRlciI6IlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfZGV2LGJkbHdfcHJkLGJkbHdfc3RnLHp6YXNfMDI5Iiwicm9sZXMiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEkiLCJBTV9BUElfQURNSU4iXX0.MAjsfJum_s_4mVbLKyejZZ0_lnnE_wv2g5xFOwgbi8lOQx7N9ZDQvOLcVsICEnGQM99laTctGR6YIlEVHTfXr-cnF0rbqfCIai47IOi6FMfDxrHGaxPcmSPgdzfGdFBsAr23cslEiTIjoX0DQe-qYL1w4Ic_00WhGfE08MaJkTrU_I3XmRD0QG05J2tpDSsm3UvXbKPGZgd5TmMCDH5yNxsqPOsTHma4SjdslqCmEEIaaxHfCDB8nqWDXM_FIYs5CU1mjAAwVMsNXoqOPPLIonszL8CFFkgLvjPffGWzIjsOFgqJH3XPGrh8EIsHxFYgUSYHj5-fs-bD6EeugIUA1A",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"domainName\": \"rohithsfcc.com\"\n}"
+						},
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/cdn/zones/{{version}}/organizations/{{organizationId}}/storefront-zones",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"zones",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"storefront-zones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Certificate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJEMWhPUDdEODN4TjBqZWlqaTI3WWFvZFRjL0E9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXVkaXRUcmFja2luZ0lkIjoiNGIxYWJjY2EtNzczNS00ZTJjLTkzYTMtNmQ3ZmJlMzJkODc2LTM4NTU5MTk5NSIsInN1Ym5hbWUiOiI0Y2JiZmY1Yy01N2I5LTRhOWMtYTFjMi04ZDQwMzU1ODRhMzUiLCJpc3MiOiJodHRwczovL2FjY291bnQuZGVtYW5kd2FyZS5jb206NDQzL2R3c3NvL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6IlhtMmg5c0tnR3FjZHdOTjBQNFRlbFd6N09VdyIsImF1ZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsIm5iZiI6MTY2ODEyMDU1NCwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInNjb3BlIjpbIm1haWwiLCJzZmNjLmNkbi16b25lcy5ydyIsInRlbmFudEZpbHRlciIsInByb2ZpbGUiLCJyb2xlcyIsIlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfc3RnIl0sImF1dGhfdGltZSI6MTY2ODEyMDU1NCwicmVhbG0iOiIvIiwiZXhwIjoxNjY4MTIyMzU0LCJpYXQiOjE2NjgxMjA1NTQsImV4cGlyZXNfaW4iOjE4MDAsImp0aSI6IkJ0cnRFLWxJbk1kVDJNdnl5S01kTlYtSFpNVSIsImNsaWVudF9pZCI6IjRjYmJmZjVjLTU3YjktNGE5Yy1hMWMyLThkNDAzNTU4NGEzNSIsInRlbmFudEZpbHRlciI6IlNBTEVTRk9SQ0VfQ09NTUVSQ0VfQVBJOmJkbHdfZGV2LGJkbHdfcHJkLGJkbHdfc3RnLHp6YXNfMDI5Iiwicm9sZXMiOlsiU0FMRVNGT1JDRV9DT01NRVJDRV9BUEkiLCJBTV9BUElfQURNSU4iXX0.MAjsfJum_s_4mVbLKyejZZ0_lnnE_wv2g5xFOwgbi8lOQx7N9ZDQvOLcVsICEnGQM99laTctGR6YIlEVHTfXr-cnF0rbqfCIai47IOi6FMfDxrHGaxPcmSPgdzfGdFBsAr23cslEiTIjoX0DQe-qYL1w4Ic_00WhGfE08MaJkTrU_I3XmRD0QG05J2tpDSsm3UvXbKPGZgd5TmMCDH5yNxsqPOsTHma4SjdslqCmEEIaaxHfCDB8nqWDXM_FIYs5CU1mjAAwVMsNXoqOPPLIonszL8CFFkgLvjPffGWzIjsOFgqJH3XPGrh8EIsHxFYgUSYHj5-fs-bD6EeugIUA1A",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "hostname",
+									"value": "www.rohithsfcc.com",
+									"type": "text"
+								},
+								{
+									"key": "certificate",
+									"value": "-----BEGIN CERTIFICATE-----\\\\nMIIDtTCCAp2gAwIBAgIJAMHAwfXZ5/PWMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV\\\\nBAYTAkFVMRMwEQYDVQQIEwpTb21lLVN0YXRlMSEwHwYDVQQKExhJbnRlcm5ldCBX\\\\naWRnaXRzIFB0eSBMdGQwHhcNMTYwODI0MTY0MzAxWhcNMTYxMTIyMTY0MzAxWjBF\\\\nMQswCQYDVQQGEwJBVTETMBEGA1UECBMKU29tZS1TdGF0ZTEhMB8GA1UEChMYSW50\\\\nZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB\\\\nCgKCAQEAwQHoetcl9+5ikGzV6cMzWtWPJHqXT3wpbEkRU9Yz7lgvddmGdtcGbg/1\\\\nCGZu0jJGkMoppoUo4c3dts3iwqRYmBikUP77wwY2QGmDZw2FvkJCJlKnabIRuGvB\\\\nKwzESIXgKk2016aTP6/dAjEHyo6SeoK8lkIySUvK0fyOVlsiEsCmOpidtnKX/a+5\\\\n0GjB79CJH4ER2lLVZnhePFR/zUOyPxZQQ4naHf7yu/b5jhO0f8fwt+pyFxIXjbEI\\\\ndZliWRkRMtzrHOJIhrmJ2A1J7iOrirbbwillwjjNVUWPf3IJ3M12S9pEewooaeO2\\\\nizNTERcG9HzAacbVRn2Y2SWIyT/18QIDAQABo4GnMIGkMB0GA1UdDgQWBBT/LbE4\\\\n9rWf288N6sJA5BRb6FJIGDB1BgNVHSMEbjBsgBT/LbE49rWf288N6sJA5BRb6FJI\\\\nGKFJpEcwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgTClNvbWUtU3RhdGUxITAfBgNV\\\\nBAoTGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZIIJAMHAwfXZ5/PWMAwGA1UdEwQF\\\\nMAMBAf8wDQYJKoZIhvcNAQELBQADggEBAHHFwl0tH0quUYZYO0dZYt4R7SJ0pCm2\\\\n2satiyzHl4OnXcHDpekAo7/a09c6Lz6AU83cKy/+x3/djYHXWba7HpEu0dR3ugQP\\\\nMlr4zrhd9xKZ0KZKiYmtJH+ak4OM4L3FbT0owUZPyjLSlhMtJVcoRp5CJsjAMBUG\\\\nSvD8RX+T01wzox/Qb+lnnNnOlaWpqu8eoOenybxKp1a9ULzIVvN/LAcc+14vioFq\\\\n2swRWtmocBAs8QR9n4uvbpiYvS8eYueDCWMM4fvFfBhaDZ3N9IbtySh3SpFdQDhw\\\\nYbjM2rxXiyLGxB4Bol7QTv4zHif7Zt89FReT/NBy4rzaskDJY5L6xmY=\\\\n-----END CERTIFICATE-----\\\\n",
+									"type": "text"
+								},
+								{
+									"key": "privateKey",
+									"value": "-----BEGIN RSA PRIVATE KEY-----\\\\nMIIEowIBAAKCAQEAwQHoetcl9+5ikGzV6cMzWtWPJHqXT3wpbEkRU9Yz7lgvddmG\\\\ndtcGbg/1CGZu0jJGkMoppoUo4c3dts3iwqRYmBikUP77wwY2QGmDZw2FvkJCJlKn\\\\nabIRuGvBKwzESIXgKk2016aTP6/dAjEHyo6SeoK8lkIySUvK0fyOVlsiEsCmOpid\\\\ntnKX/a+50GjB79CJH4ER2lLVZnhePFR/zUOyPxZQQ4naHf7yu/b5jhO0f8fwt+py\\\\nFxIXjbEIdZliWRkRMtzrHOJIhrmJ2A1J7iOrirbbwillwjjNVUWPf3IJ3M12S9pE\\\\newooaeO2izNTERcG9HzAacbVRn2Y2SWIyT/18QIDAQABAoIBACbhTYXBZYKmYPCb\\\\nHBR1IBlCQA2nLGf0qRuJNJZg5iEzXows/6tc8YymZkQE7nolapWsQ+upk2y5Xdp/\\\\naxiuprIs9JzkYK8Ox0r+dlwCG1kSW+UAbX0bQ/qUqlsTvU6muVuMP8vZYHxJ3wmb\\\\n+ufRBKztPTQ/rYWaYQcgC0RWI20HTFBMxlTAyNxYNWzX7RKFkGVVyB9RsAtmcc8g\\\\n+j4OdosbfNoJPS0HeIfNpAznDfHKdxDk2Yc1tV6RHBrC1ynyLE9+TaflIAdo2MVv\\\\nKLMLq51GqYKtgJFIlBRPQqKoyXdz3fGvXrTkf/WY9QNq0J1Vk5ERePZ54mN8iZB7\\\\n9lwy/AkCgYEA6FXzosxswaJ2wQLeoYc7ceaweX/SwTvxHgXzRyJIIT0eJWgx13Wo\\\\n/WA3Iziimsjf6qE+SI/8laxPp2A86VMaIt3Z3mJN/CqSVGw8LK2AQst+OwdPyDMu\\\\niacE8lj/IFGC8mwNUAb9CzGU3JpU4PxxGFjS/eMtGeRXCWkK4NE+G08CgYEA1Kp9\\\\nN2JrVlqUz+gAX+LPmE9OEMAS9WQSQsfCHGogIFDGGcNf7+uwBM7GAaSJIP01zcoe\\\\nVAgWdzXCv3FLhsaZoJ6RyLOLay5phbu1iaTr4UNYm5WtYTzMzqh8l1+MFFDl9xDB\\\\nvULuCIIrglM5MeS/qnSg1uMoH2oVPj9TVst/ir8CgYEAxrI7Ws9Zc4Bt70N1As+U\\\\nlySjaEVZCMkqvHJ6TCuVZFfQoE0r0whdLdRLU2PsLFP+q7qaeZQqgBaNSKeVcDYR\\\\n9B+nY/jOmQoPewPVsp/vQTCnE/R81spu0mp0YI6cIheT1Z9zAy322svcc43JaWB7\\\\nmEbeqyLOP4Z4qSOcmghZBSECgYACvR9Xs0DGn+wCsW4vze/2ei77MD4OQvepPIFX\\\\ndFZtlBy5ADcgE9z0cuVB6CiL8DbdK5kwY9pGNr8HUCI03iHkW6Zs+0L0YmihfEVe\\\\nPG19PSzK9CaDdhD9KFZSbLyVFmWfxOt50H7YRTTiPMgjyFpfi5j2q348yVT0tEQS\\\\nfhRqaQKBgAcWPokmJ7EbYQGeMbS7HC8eWO/RyamlnSffdCdSc7ue3zdVJxpAkQ8W\\\\nqu80pEIF6raIQfAf8MXiiZ7auFOSnHQTXUbhCpvDLKi0Mwq3G8Pl07l+2s6dQG6T\\\\nlv6XTQaMyf6n1yjzL+fzDrH3qXMxHMO/b13EePXpDMpY7HQpoLDi\\\\n-----END RSA PRIVATE KEY-----\\\\n\"",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{shortCode}}.api.commercecloud.salesforce.com/cdn/zones/{{version}}/organizations/{{organizationId}}/zones/77cae6aa2aa6494be855f5a12eacdf97/certificates",
+							"protocol": "https",
+							"host": [
+								"{{shortCode}}",
+								"api",
+								"commercecloud",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"cdn",
+								"zones",
+								"{{version}}",
+								"organizations",
+								"{{organizationId}}",
+								"zones",
+								"77cae6aa2aa6494be855f5a12eacdf97",
+								"certificates"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

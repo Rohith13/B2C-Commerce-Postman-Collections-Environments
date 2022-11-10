@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "556f9c09-e1f3-48a2-ad80-261be920635d",
+		"name": "Cloudflare API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9736386"
+	},
+	"item": [
+		{
+			"name": "GET eCDN zone logs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "cReklkPsHWCQKCZ7EgRv_-cwdT5JoBhde5mDSdeE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Email",
+						"value": "rgunupudi@salesforce.com",
+						"type": "text"
+					},
+					{
+						"key": "X-Auth-Key",
+						"value": "z1LmFC4VsYpNUDGoZYfZb_mh75-E4vElMZ1QB0R0",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.cloudflare.com/client/v4/zones/edb2b541af00885c38b1f7cb76158c34/logs/received?start=2022-10-11T20:30:00Z&end=2022-10-11T21:00:00Z&count=20000&sample=0.5&fields=ClientRequestURI,ClientRequestHost,expected_codes",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cloudflare",
+						"com"
+					],
+					"path": [
+						"client",
+						"v4",
+						"zones",
+						"edb2b541af00885c38b1f7cb76158c34",
+						"logs",
+						"received"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2022-10-11T20:30:00Z"
+						},
+						{
+							"key": "end",
+							"value": "2022-10-11T21:00:00Z"
+						},
+						{
+							"key": "count",
+							"value": "20000"
+						},
+						{
+							"key": "sample",
+							"value": "0.5"
+						},
+						{
+							"key": "fields",
+							"value": "ClientRequestURI,ClientRequestHost,expected_codes"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET eCDN logs - ray id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "cReklkPsHWCQKCZ7EgRv_-cwdT5JoBhde5mDSdeE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Email",
+						"value": "rgunupudi@salesforce.com",
+						"type": "text"
+					},
+					{
+						"key": "X-Auth-Key",
+						"value": "z1LmFC4VsYpNUDGoZYfZb_mh75-E4vElMZ1QB0R0",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.cloudflare.com/client/v4/zones/e29219e7d51d54eff5b4514b9cae6408/logs/rayids/75a2b239b868f480?timestamps=unixnano&fields=CacheResponseStatus,ClientIP,ClientCountry,ClientDeviceType,ClientRequestReferer,ClientRequestProtocol,ClientRequestUserAgent,ClientRequestURI,CacheCacheStatus,RayID,SecurityLevel,WAFAction,OriginResponseStatus,EdgeResponseStatus,ClientRequestMethod,EdgeStartTimestamp,EdgeEndTimestamp",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cloudflare",
+						"com"
+					],
+					"path": [
+						"client",
+						"v4",
+						"zones",
+						"e29219e7d51d54eff5b4514b9cae6408",
+						"logs",
+						"rayids",
+						"75a2b239b868f480"
+					],
+					"query": [
+						{
+							"key": "timestamps",
+							"value": "unixnano"
+						},
+						{
+							"key": "EdgeResponseStatus",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "fields",
+							"value": "CacheResponseStatus,ClientIP,ClientCountry,ClientDeviceType,ClientRequestReferer,ClientRequestProtocol,ClientRequestUserAgent,ClientRequestURI,CacheCacheStatus,RayID,SecurityLevel,WAFAction,OriginResponseStatus,EdgeResponseStatus,ClientRequestMethod,EdgeStartTimestamp,EdgeEndTimestamp"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
