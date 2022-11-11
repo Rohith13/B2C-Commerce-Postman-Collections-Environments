@@ -1,12 +1,12 @@
 # B2C-Commerce-Postman-Collections-Environments
 Repo contains useful B2C Commerce Postman Calls for "educational / learning" purpose.
 
-For playing around with `OCAPI` endpoints, you can directly download the **OCAPI demo.postman_collection.json** & **OCAPI Env Vars.postman_environment**
+For playing around with `OCAPI endpoint` calls, you can directly download the **OCAPI demo.postman_collection.json** & **OCAPI Env Vars.postman_environment**
 
 
 ********************************************************************************************************************
 
-`Headless / SCAPI` collection contain:
+`Headless / SCAPI endpoint` collection contain:
 - **Regular SCAPI** calls (product, coupon, etc)
 - **Einstein API** calls 
 - **Zone API** calls 
@@ -35,7 +35,7 @@ Under Key & value in Headers of the request add the below respectively
 
 
 
-For playing around with `SLAS` endpoints, you can directly download the **SLAS Shopper API.postman_collection.json** & **SLAS Env Vars.postman_environment.json**
+For playing around with `SLAS endpoint` calls, you can directly download the **SLAS Shopper API.postman_collection.json** & **SLAS Env Vars.postman_environment.json**
 
 
 For using the `Cloduflare APIs`, follow the DOC for generating the API Token which need to be used as Bearer Token and you can use my **Cloudflare API.postman_collection.json** as reference.
@@ -43,7 +43,7 @@ For using the `Cloduflare APIs`, follow the DOC for generating the API Token whi
 
 
 
-**NOTE**: These are purely for education purpose, kindly download the Collection(s) & Environment(s) but, I request you all to please modify the environment with respective Client IDs, Client Secrets & environment scopes.  
+**NOTE**: These are purely for “educational” purpose, you can download the collection(s) & environment(s) but, I request all of you to kindly modify the environment with respective Client IDs, Client Secrets & environment scopes. 
 
 
 
