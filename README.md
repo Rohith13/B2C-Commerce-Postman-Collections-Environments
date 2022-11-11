@@ -14,9 +14,11 @@ For playing around with `OCAPI endpoint` calls, you can directly download the **
 
 Hence, download **Headless NEW API's.postman_collection.json** collection and import into your Postman workspace.
 
-For using normal SCAPI calls (product, coupon, etc) you can use **Headless Env Vars.postman_environment.json**
-For using Einstein / Zone APIs, I would recommend you to download **Einstein Headless Environment.postman_environment.json** as it has our BDLW test environment.
-For using Staging eCDN APIs, kindly download **eCDN STG Environment.postman_environment.json**
+a) For using normal SCAPI calls (product, coupon, etc) you can use **Headless Env Vars.postman_environment.json**
+
+b) For using Einstein / eCDN Zone APIs, I would recommend you to download **Einstein Headless Environment.postman_environment.json** as it has our BDLW test environment.
+
+c) For using Staging eCDN APIs, kindly download **eCDN STG Environment.postman_environment.json**
 
 
 To make this solution work for your Commerce Cloud Sandbox, do the following:
